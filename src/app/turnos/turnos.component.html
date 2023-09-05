@@ -1,1 +1,58 @@
-<p>turnos works!</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Odontologos</title>
+</head>
+<body>
+  <header>
+    <nav>
+      <h1>Gestión de Turnos</h1>
+      <img src="../../assets/DigitalHouse_Logo_White.png" alt="logoDH">
+    </nav>
+  </header>
+<div class="container">
+  <button class="btn btn-sm btn-success mb-2" (click)="abrirFormulario()">Reservar Turno</button>
+  <div *ngIf="mostrarFormulario">
+    <form (submit)="guardarTurno()">
+      <label for="paciente">Paciente:</label>
+      <select id="paciente" [(ngModel)]="turno.paciente" name="pacienteId" required>
+        <option *ngFor="let paciente of pacientes" [value]="paciente.dni">{{ paciente.nombre }} {{ paciente.apellido }}</option>
+      </select>
+      <label for="odontologo">Odontólogo:</label>
+      <select id="odontologo" [(ngModel)]="turno.odontologo" name="odontologoId" required>
+        <option *ngFor="let odontologo of odontologos" [value]="odontologo.matricula">{{ odontologo.nombre }} {{ odontologo.apellido }}</option>
+      </select>
+      <label for="fecha">Fecha:</label>
+      <input type="datetime-local" id="fecha" [(ngModel)]="turno.fecha" name="fecha" required>
+
+      <button type="submit" class="btn btn-primary m-2">Reservar</button>
+      <button type="button" class="btn btn-secondary" (click)="cerrarFormulario()">Cancelar</button>
+    </form>
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Paciente</th>
+        <th>Odontólogo</th>
+        <th>Fecha</th>
+        <th>Hora</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let turno of turnos; let i = index">
+        <td>{{ obtenerPaciente(turno.paciente).nombre }}</td>
+        <td>{{ obtenerOdontologo(turno.odontologo).nombre }}</td>
+        <td>{{ turno.fecha | date: 'dd/MM/yyyy HH:mm' }}</td>
+        <td>{{ turno.hora }}</td>
+        <td>
+          <!-- Agrega botones para editar y eliminar turnos si es necesario -->
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>
