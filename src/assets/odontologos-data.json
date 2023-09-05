@@ -1,0 +1,32 @@
+[
+  {
+    "matricula": "12345",
+    "nombre": "Juan",
+    "apellido": "Pérez"
+  },
+  {
+    "matricula": "67890",
+    "nombre": "María",
+    "apellido": "González"
+  },
+  {
+    "matricula": "12345",
+    "nombre": "Juan",
+    "apellido": "Pérez"
+  },
+  {
+    "matricula": "67890",
+    "nombre": "María",
+    "apellido": "González"
+  },
+  {
+    "matricula": "12345",
+    "nombre": "Juan",
+    "apellido": "Pérez"
+  },
+  {
+    "matricula": "67890",
+    "nombre": "María",
+    "apellido": "González"
+  }
+]

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Odontologos</title>
+</head>
+<body>
+  <header>
+    <nav>
+      <h1>Gestión de Odontólogos</h1>
+      <img src="../../assets/DigitalHouse_Logo_White.png" alt="logoDH">
+    </nav>
+  </header>
+  <div class="container">
+    <button class="btn btn-sm btn-success mb-2" (click)="abrirFormularioCrear()">Crear Odontólogo</button>
+    <div *ngIf="mostrarFormularioCrear">
+      <form (submit)="crearOdontologo()">
+        <label for="matricula">Matrícula:</label>
+        <input type="text" id="matricula" [(ngModel)]="nuevoOdontologo.matricula" name="matricula" required>
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" [(ngModel)]="nuevoOdontologo.nombre" name="nombre" required>
+        <label for="apellido">Apellido:</label>
+        <input type="text" id="apellido" [(ngModel)]="nuevoOdontologo.apellido" name="apellido" required>
+
+        <button type="submit" class="btn btn-primary m-2">Enviar</button>
+        <button type="button" class="btn btn-secondary" (click)="cerrarFormularioCrear()">Cancelar</button>
+      </form>
+    </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Matrícula</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let odontologo of odontologos; let i = index">
+          <ng-container *ngIf="odontologoEnEdicionIndex !==i; else editarOdontologo">
+            <td>{{ odontologo.nombre }}</td>
+            <td>{{ odontologo.apellido }}</td>
+            <td>{{ odontologo.matricula }}</td>
+            <td>
+              <button class="btn btn-sm btn-primary m-2" (click)="editar(i)">Editar</button>
+              <button class="btn btn-sm btn-danger" (click)="eliminarOdontologo(odontologo.matricula)">Eliminar</button>
+            </td>
+          </ng-container>
+          <ng-template #editarOdontologo>
+            <td>
+              <input type="text" [(ngModel)]="odontologos[i].nombre" name="nombre" required>
+            </td>
+            <td>
+              <input type="text" [(ngModel)]="odontologos[i].apellido" name="apellido" required>
+            </td>
+            <td>
+              <input type="text" [(ngModel)]="odontologos[i].matricula" name="matricula" required>
+            </td>
+            <td>
+              <button class="btn btn-sm btn-success m-2" (click)="guardarEdicion(i)">Guardar</button>
+              <button class="btn btn-sm btn-secondary" (click)="cancelarEdicion(i)">Cancelar</button>
+            </td>
+          </ng-template>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>
+
