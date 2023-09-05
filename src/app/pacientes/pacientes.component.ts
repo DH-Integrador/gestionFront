@@ -1,13 +1,18 @@
+<<<<<<< HEAD
 import { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { PacientesService } from '../services/pacientes.service';
 import { Paciente } from '../models/paciente.model';
+=======
+import { Component } from '@angular/core';
+>>>>>>> 14e578891308c94bff49f107195cfd982f51b363
 
 @Component({
   selector: 'app-pacientes',
   templateUrl: './pacientes.component.html',
   styleUrls: ['./pacientes.component.css']
 })
+<<<<<<< HEAD
 export class PacientesComponent implements OnInit{
   pacientes: Paciente[] = [];
   mostrarFormularioCrear: boolean = false;
@@ -89,5 +94,8 @@ export class PacientesComponent implements OnInit{
     );
   }
 
+=======
+export class PacientesComponent {
+>>>>>>> 14e578891308c94bff49f107195cfd982f51b363
 
 }
