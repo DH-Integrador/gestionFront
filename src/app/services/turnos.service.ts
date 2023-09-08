@@ -17,6 +17,21 @@ export class TurnosService {
   }
 
   postTurno(turno: Turno): Observable<Turno> {
-    return this.http.post<Turno>(this.baseUrl, turno);
+    const url = `${this.baseUrl}/register`;
+    console.log(turno);
+
+    return this.http.post<Turno>(url, turno);
+  }
+
+  deleteTurno(id: number): Observable<any> {
+    const url = `${this.baseUrl}/${id}`;
+
+    return this.http.delete(url);
+  }
+
+  editarTurno(turno: Turno): Observable<Turno> {
+    const url = `${this.baseUrl}/${turno.id}`;
+
+    return this.http.put<Turno>(url, turno);
   }
 }

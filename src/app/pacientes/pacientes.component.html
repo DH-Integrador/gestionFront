@@ -13,7 +13,7 @@
     </nav>
   </header>
   <div class="container">
-    <button class="btn btn-sm btn-success mb-2" (click)="abrirFormularioCrear()">Crear Odontólogo</button>
+    <button class="btn btn-sm btn-success mb-2" (click)="abrirFormularioCrear()">Crear Paciente</button>
     <div *ngIf="mostrarFormularioCrear">
       <form (submit)="crearPaciente()">
         <label for="nombre">Nombre:</label>
@@ -22,8 +22,17 @@
         <input type="text" id="apellido" [(ngModel)]="nuevoPaciente.apellido" name="apellido" required>
         <label for="dni">Dni:</label>
         <input type="text" id="dni" [(ngModel)]="nuevoPaciente.dni" name="dni" required>
+        <br/>
         <label for="domicilio">Domicilio:</label>
-        <input type="text" id="domicilio" [(ngModel)]="nuevoPaciente.domicilio" name="domicilio" required>
+        <br/>
+        <label for="calle">Calle:</label>
+        <input type="text" id="calle" [(ngModel)]="nuevoPaciente.domicilio.calle" name="calle" required>
+        <label for="numero">Número:</label>
+        <input type="text" id="numero" [(ngModel)]="nuevoPaciente.domicilio.numero" name="numero" required>
+        <label for="localidad">Localidad:</label>
+        <input type="text" id="localidad" [(ngModel)]="nuevoPaciente.domicilio.localidad" name="localidad" required>
+        <label for="provincia">Provincia:</label>
+        <input type="text" id="provincia" [(ngModel)]="nuevoPaciente.domicilio.provincia" name="provincia" required>
         <button type="submit" class="btn btn-primary m-2">Enviar</button>
         <button type="button" class="btn btn-secondary" (click)="cerrarFormularioCrear()">Cancelar</button>
       </form>
@@ -35,6 +44,7 @@
           <th>Apellido</th>
           <th>Dni</th>
           <th>Domicilio</th>
+          <th>Acciones</th>
         </tr>
       </thead>
       <tbody>
@@ -43,7 +53,7 @@
             <td>{{ paciente.nombre }}</td>
             <td>{{ paciente.apellido }}</td>
             <td>{{ paciente.dni }}</td>
-            <td>{{ paciente.domicilio }}</td>
+            <td>{{ "Calle " + paciente.domicilio.calle + " #" + paciente.domicilio.numero + " " + paciente.domicilio.localidad + " " + paciente.domicilio.provincia }}</td>
             <td>
               <button class="btn btn-sm btn-primary m-2" (click)="editar(i)">Editar</button>
               <button class="btn btn-sm btn-danger" (click)="eliminarPaciente(paciente.dni)">Eliminar</button>
@@ -60,8 +70,11 @@
               <input type="text" [(ngModel)]="pacientes[i].dni" name="dni" required>
             </td>
             <td>
-                <input type="text" [(ngModel)]="pacientes[i].domicilio" name="domicilio" required>
-              </td>
+              <input type="text" [(ngModel)]="pacientes[i].domicilio.calle" name="calle" required>
+              <input type="text" [(ngModel)]="pacientes[i].domicilio.numero" name="numero" required>
+              <input type="text" [(ngModel)]="pacientes[i].domicilio.localidad" name="localidad" required>
+              <input type="text" [(ngModel)]="pacientes[i].domicilio.provincia" name="provincia" required>
+            </td>
             <td>
               <button class="btn btn-sm btn-success m-2" (click)="guardarEdicion(i)">Guardar</button>
               <button class="btn btn-sm btn-secondary" (click)="cancelarEdicion(i)">Cancelar</button>

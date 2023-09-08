@@ -3,15 +3,14 @@ import { Paciente } from "./paciente.model";
 
 export class Turno {
   id?: number;
-  odontologo: Odontologo
+  odontologo: Odontologo;
   paciente: Paciente;
   fecha: Date;
-  hora: number;
+  hora?: string;
 
-  constructor(odontologo: Odontologo, paciente: Paciente, fecha: Date, hora: number) {
+  constructor(odontologo: Odontologo, paciente: Paciente, fecha: Date) {
     this.odontologo = odontologo;
     this.paciente = paciente;
     this.fecha = fecha;
-    this.hora = hora;
   }
 }

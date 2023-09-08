@@ -43,13 +43,34 @@
     </thead>
     <tbody>
       <tr *ngFor="let turno of turnos; let i = index">
-        <td>{{ obtenerPaciente(turno.paciente).nombre }}</td>
-        <td>{{ obtenerOdontologo(turno.odontologo).nombre }}</td>
-        <td>{{ turno.fecha | date: 'dd/MM/yyyy HH:mm' }}</td>
-        <td>{{ turno.hora }}</td>
-        <td>
-          <!-- Agrega botones para editar y eliminar turnos si es necesario -->
-        </td>
+        <ng-container *ngIf="turnoEnEdicionIndex !==i; else editarTurno">
+          <td>{{ obtenerPaciente(turno.paciente).dni }}</td>
+          <td>{{ obtenerOdontologo(turno.odontologo).matricula }}</td>
+          <td>{{ turno.fecha | date: 'dd/MM/yyyy' }}</td>
+          <td>{{ convertirHora(turno.hora || '') }}</td>
+          <td>
+            <button class="btn btn-sm btn-success m-2" (click)="editar(i)">Editar</button>
+            <button class="btn btn-sm btn-secondary" (click)="eliminarTurno(turno)">Eliminar</button>
+          </td>
+        </ng-container>
+        <ng-template #editarTurno>
+          <td>
+            <span>{{ obtenerPaciente(turnos[i].paciente).nombre }} {{ obtenerPaciente(turnos[i].paciente).apellido }}</span>
+          </td>
+          <td>
+            <span>{{ obtenerOdontologo(turnos[i].odontologo).nombre }} {{ obtenerOdontologo(turnos[i].odontologo).apellido }}</span>
+          </td>
+          <td>
+            <input type="datetime-local" id="fecha" [(ngModel)]="turnos[i].fecha" name="fecha" required>
+          </td>
+          <td>
+            <input type="time" id="hora" [(ngModel)]="turnos[i].hora" name="hora" required>
+          </td>
+          <td>
+            <button class="btn btn-sm btn-success m-2" (click)="guardarEdicion(i)">Guardar</button>
+            <button class="btn btn-sm btn-secondary" (click)="cancelarEdicion(i)">Cancelar</button>
+          </td>
+        </ng-template>
       </tr>
     </tbody>
   </table>
